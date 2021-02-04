@@ -4,8 +4,8 @@
     "parameters": {
     },
     "variables": {
-        "logicAppName": "[concat('lap-challenge-', uniqueString(resourceGroup().name))]",
-        "storageAccountName": "[concat('lapchallenge', uniqueString(resourceGroup().name))]"
+        "logicAppName": "[concat('lap-test-', uniqueString(resourceGroup().name))]",
+        "storageAccountName": "[concat('laptest', uniqueString(resourceGroup().name))]"
     },
     "resources": [
         {
@@ -36,14 +36,10 @@
                 {
                     "type": "blobServices/containers",
                     "apiVersion": "2019-06-01",
-                    "name": "pull-requests",
-                    "properties": {
-                        "publicAccess": "Container"
-                    }
-
+                    "name": "default/pull-requests",
+                    "dependsOn": [ "[variables('storageAccountName')]" ]
                 }
-            ],
-            "dependsOn": ["[variables('storageAccountName')]"]
+            ]
         }
 
     ],
