@@ -42,7 +42,8 @@
                     }
 
                 }
-            ]
+            ],
+            "dependsOn": ["[variables('storageAccountName')]"]
         }
 
     ],
