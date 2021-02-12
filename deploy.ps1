@@ -1,7 +1,12 @@
 param (
-    $n,
-    $l = "australiaeast"
+    $resourceGroupName,
+    $location,
+    [switch] $useParamsFile 
 )
 
-az group create -n $n -l $l
-az deployment group create --resource-group $n --template-file azuredeploy.json
+az group create -n $resourceGroupName -l $location
+if ($useParamsFile) {
+    az deployment group create --resource-group $resourceGroupName --template-file azuredeploy.json --parameter-file @parameters.json
+} else {
+    az deployment group create --resource-group $resourceGroupName --template-file azuredeploy.json
+}
