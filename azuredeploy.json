@@ -2,6 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "a":{"type": "string"}
     },
     "variables": {
         "logicAppName": "[concat('lap-test-', uniqueString(resourceGroup().name))]",
@@ -37,7 +38,10 @@
                     "type": "blobServices/containers",
                     "apiVersion": "2019-06-01",
                     "name": "default/pull-requests",
-                    "dependsOn": [ "[variables('storageAccountName')]" ]
+                    "dependsOn": [ "[variables('storageAccountName')]" ],
+                    "properties":{
+                        "publicAccess": "Container"
+                    }
                 }
             ]
         }
